@@ -5,6 +5,8 @@ from flask_scss import Scss
 
 #The App
 app = Flask(__name__)
+Scss(app)
+
 
 #Home Page of the app
 @app.route('/')
