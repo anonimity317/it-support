@@ -25,5 +25,10 @@ jobs:
       run: |
         pip install -r requirements.txt
       
-    - name: Run Linter
-      run: flake8 app.py
+    - name: Run Super-Linter
+      uses: github/super-linter@v4
+      env:
+        VALIDATE_PYTHON: true   # Enables Python linting
+        VALIDATE_HTML: true     # Enables HTML linting
+        VALIDATE_JAVASCRIPT: true # Enables JavaScript linting
+        DEFAULT_BRANCH: main    # Set default branch for linting checks
