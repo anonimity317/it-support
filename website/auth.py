@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
+from .models import User
+from . import db
 
 auth = Blueprint('auth', __name__)
 
@@ -37,9 +39,10 @@ def signup():
             flash('Password must be at least 4 characters Long.', category='error')
         else:
             pass_out = generate_password_hash(password1,  method='pbkdf2:sha1', salt_length=8)
-            print(username, first_name, pass_out)
-            # db.session.add(new_user)
-            # db.session.commit()
-            # login_user(new_user, remember=True)
+            new_user = User(username=username, first_name=first_name, password=pass_out, pu=False)
+            db.session.add(new_user)
+            db.session.commit()
             flash('Account created!', category='success')
+            return redirect(url_for('routes.home'))
+        
     return render_template('sign-up.html')
