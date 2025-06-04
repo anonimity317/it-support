@@ -10,6 +10,10 @@ class User(db.Model, UserMixin):
     pu = db.Column(db.Boolean, default=False)
     tickets = db.relationship('ActiveTicket', lazy=True)
 
+    @property
+    def id(self):
+        return self.user_id
+
 class ActiveTicket(db.Model):
     ticket_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
