@@ -17,6 +17,7 @@
                 <th style="width: 40%;">Content</th>
                 <th>Priority</th>
                 <th>Creation Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,11 @@
                         <td style="width: 40%;">{{ ticket.content }}</td>
                         <td>{{ ticket.priority }}</td>
                         <td>{{ ticket.created_at }}</td>
+                        <td>
+                            <a href="{{ url_for('routes.update_ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-secondary btn-sm">
+                                Update
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             {% else %}
@@ -39,6 +45,5 @@
     </table>
     <form>
         <button formaction="/add_ticket" type="submit" class="btn btn-primary">Add New Ticket</button>
-        <button formaction="/update_ticket" type="submit" class="btn btn-secondary">Update Ticket</button>
     </form>
 {% endblock %}

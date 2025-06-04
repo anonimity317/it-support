@@ -31,3 +31,20 @@ def add_ticket():
             flash('Ticket added successfully!', category='success')
             return redirect(url_for('routes.home'))
     return render_template('add_ticket.html', user=current_user)
+
+@routes.route('/delete_ticket/<int:ticket_id>', methods=['POST', 'GET'])
+@login_required
+def update_ticket(ticket_id):
+    ticket = ActiveTicket.query.get_or_404(ticket_id)
+    if request.method == 'POST':
+        ticket.title = request.form.get('title')
+        ticket.content = request.form.get('content')
+        ticket.priority = request.form.get('priority')
+
+        if not ticket.title or not ticket.content:
+            flash('Title and content are required.', category='error')
+        else:
+            db.session.commit()
+            flash('Ticket updated successfully!', category='success')
+            return redirect(url_for('routes.home'))
+    return render_template('update_ticket.html', user=current_user, ticket=ticket)
