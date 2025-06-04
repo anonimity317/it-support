@@ -20,15 +20,35 @@
             </tr>
         </thead>
         <tbody>
-            {% for ticket in tickets %}
-            <tr>
-                <td>{{ ticket.id }}</td>
-                <td>{{ ticket.title }}</td>
-                <td style="width: 40%;">{{ ticket.content }}</td>
-                <td>{{ ticket.priority }}</td>
-                <td>{{ ticket.creation_date }}</td>
-            </tr>
-            {% endfor %}
+            {% if user.tickets %}
+                {% for ticket in user.tickets %}
+                    <tr>
+                        <td>{{ ticket.ticket_id }}</td>
+                        <td>{{ ticket.title }}</td>
+                        <td style="width: 40%;">{{ ticket.content }}</td>
+                        <td>{{ ticket.priority }}</td>
+                        <td>{{ ticket.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">No active tickets found.</td>
+                </tr>
+            {% elif user.pu == "True" %}
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.ticket_id }}</td>
+                        <td>{{ ticket.title }}</td>
+                        <td style="width: 40%;">{{ ticket.content }}</td>
+                        <td>{{ ticket.priority }}</td>
+                        <td>{{ ticket.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
     </table>
+    <form>
+        <button formaction="/add_ticket" type="submit" class="btn btn-primary">Add New Ticket</button>
+        <button formaction="/update_ticket" type="submit" class="btn btn-secondary">Update Ticket</button>
+    </form>
 {% endblock %}
