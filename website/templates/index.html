@@ -20,8 +20,8 @@
             </tr>
         </thead>
         <tbody>
-            {% if user.tickets %}
-                {% for ticket in user.tickets %}
+            {% if tickets %}
+                {% for ticket in tickets %}
                     <tr>
                         <td>{{ ticket.ticket_id }}</td>
                         <td>{{ ticket.title }}</td>
@@ -34,16 +34,6 @@
                 <tr>
                     <td colspan="5" class="text-center">No active tickets found.</td>
                 </tr>
-            {% elif user.pu == "True" %}
-                {% for ticket in tickets %}
-                    <tr>
-                        <td>{{ ticket.ticket_id }}</td>
-                        <td>{{ ticket.title }}</td>
-                        <td style="width: 40%;">{{ ticket.content }}</td>
-                        <td>{{ ticket.priority }}</td>
-                        <td>{{ ticket.created_at }}</td>
-                    </tr>
-                {% endfor %}
             {% endif %}
         </tbody>
     </table>

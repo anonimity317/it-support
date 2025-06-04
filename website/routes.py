@@ -8,7 +8,11 @@ routes = Blueprint('routes', __name__)
 @routes.route('/')
 @login_required
 def home():
-    return render_template('index.html', user=current_user) 
+    if current_user.pu:
+        tickets = ActiveTicket.query.all()
+    else:
+        tickets = current_user.tickets
+    return render_template('index.html', user=current_user, tickets=tickets)
 
 @routes.route('/add_ticket', methods=['GET', 'POST'])
 @login_required
