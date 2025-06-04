@@ -35,5 +35,8 @@
     </select>
   </div>
   <button type="submit" class="btn btn-primary">Update Ticket</button>
+  {% if user.pu %}
+    <button type="submit" name="close_ticket" value="1" class="btn btn-danger ml-2">Close Ticket</button>
+  {% endif %}
 </form>
 {% endblock %}

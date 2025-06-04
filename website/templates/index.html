@@ -23,18 +23,27 @@
         <tbody>
             {% if tickets %}
                 {% for ticket in tickets %}
-                    <tr>
-                        <td>{{ ticket.ticket_id }}</td>
-                        <td>{{ ticket.title }}</td>
-                        <td style="width: 40%;">{{ ticket.content }}</td>
-                        <td>{{ ticket.priority }}</td>
-                        <td>{{ ticket.created_at }}</td>
-                        <td>
-                            <a href="{{ url_for('routes.update_ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-secondary btn-sm">
-                                Update
-                            </a>
-                        </td>
-                    </tr>
+                    {% if ticket.status == 'Open' %}
+                        <tr>
+                            <td>{{ ticket.ticket_id }}</td>
+                            <td>{{ ticket.title }}</td>
+                            <td style="width: 40%;">{{ ticket.content }}</td>
+                            <td>{{ ticket.priority }}</td>
+                            <td>{{ ticket.created_at }}</td>
+                            <td>
+                                <a href="{{ url_for('routes.update_ticket', ticket_id=ticket.ticket_id) }}" class="btn btn-secondary btn-sm">
+                                    Update
+                                </a>
+                                {% if user.pu %}
+                                    <form method="POST" action="{{ url_for('routes.update_ticket', ticket_id=ticket.ticket_id) }}" style="display:inline;">
+                                        <button type="submit" name="close_ticket" value="1" class="btn btn-danger btn-sm ml-2">
+                                            Close
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 <tr>

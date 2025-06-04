@@ -32,11 +32,18 @@ def add_ticket():
             return redirect(url_for('routes.home'))
     return render_template('add_ticket.html', user=current_user)
 
-@routes.route('/delete_ticket/<int:ticket_id>', methods=['POST', 'GET'])
+@routes.route('/update_ticket/<int:ticket_id>', methods=['GET', 'POST'])
 @login_required
 def update_ticket(ticket_id):
     ticket = ActiveTicket.query.get_or_404(ticket_id)
     if request.method == 'POST':
+        # Soft delete if admin clicked "Close Ticket"
+        if current_user.pu and request.form.get('close_ticket'):
+            ticket.status = 'Closed'
+            db.session.commit()
+            flash('Ticket closed successfully!', category='success')
+            return redirect(url_for('routes.home'))
+
         ticket.title = request.form.get('title')
         ticket.content = request.form.get('content')
         ticket.priority = request.form.get('priority')
