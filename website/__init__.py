@@ -6,6 +6,7 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -15,7 +16,7 @@ def create_app():
     db.init_app(app)
 
     from .routes import routes
-    from .auth import auth  
+    from .auth import auth
     from .models import User
 
     # Register blueprints
