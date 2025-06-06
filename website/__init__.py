@@ -14,10 +14,9 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
-
     from .routes import routes
     from .auth import auth  
-    from .models import User, ActiveTicket
+    from .models import User
 
     # Register blueprints
     app.register_blueprint(routes, url_prefix='/')

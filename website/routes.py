@@ -3,17 +3,19 @@ from flask_login import login_required, current_user
 from . import db
 from .models import ActiveTicket
 
+
 routes = Blueprint('routes', __name__)
+
 
 @routes.route('/')
 @login_required
 def home():
     if current_user.pu:
         tickets = ActiveTicket.query.all()
-        
     else:
         tickets = current_user.tickets
     return render_template('index.html', user=current_user, tickets=tickets)
+
 
 @routes.route('/add_ticket', methods=['GET', 'POST'])
 @login_required
@@ -22,7 +24,6 @@ def add_ticket():
         title = request.form.get('title')
         content = request.form.get('content')
         priority = request.form.get('priority')
-
         if not title or not content:
             flash('Title and content are required.', category='error')
         else:
@@ -32,6 +33,7 @@ def add_ticket():
             flash('Ticket added successfully!', category='success')
             return redirect(url_for('routes.home'))
     return render_template('add_ticket.html', user=current_user)
+
 
 @routes.route('/update_ticket/<int:ticket_id>', methods=['GET', 'POST'])
 @login_required
@@ -44,11 +46,9 @@ def update_ticket(ticket_id):
             db.session.commit()
             flash('Ticket closed successfully!', category='success')
             return redirect(url_for('routes.home'))
-
         ticket.title = request.form.get('title')
         ticket.content = request.form.get('content')
         ticket.priority = request.form.get('priority')
-
         if not ticket.title or not ticket.content:
             flash('Title and content are required.', category='error')
         else:

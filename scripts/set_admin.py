@@ -11,3 +11,4 @@ with app.app_context():
         print("User 'admin' updated: pu=True")
     else:
         print("User 'admin' not found.")
+        
