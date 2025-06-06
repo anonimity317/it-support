@@ -30,5 +30,4 @@ jobs:
       env:
         VALIDATE_PYTHON: true   # Enables Python linting
         VALIDATE_HTML: true     # Enables HTML linting
-        VALIDATE_JAVASCRIPT: true # Enables JavaScript linting
         DEFAULT_BRANCH: main    # Set default branch for linting checks
