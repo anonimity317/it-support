@@ -1,6 +1,7 @@
 import unittest
 from website import create_app
 
+
 class FlaskRoutesTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
@@ -24,4 +25,3 @@ class FlaskRoutesTest(unittest.TestCase):
         response = self.client.get('/sign-up')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Sign-up', response.data)
-        
