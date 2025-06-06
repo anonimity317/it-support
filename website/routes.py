@@ -10,6 +10,7 @@ routes = Blueprint('routes', __name__)
 def home():
     if current_user.pu:
         tickets = ActiveTicket.query.all()
+        
     else:
         tickets = current_user.tickets
     return render_template('index.html', user=current_user, tickets=tickets)

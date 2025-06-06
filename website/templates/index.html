@@ -13,11 +13,14 @@
         <thead class="thead-dark">
             <tr>
                 <th>Ticket ID</th>
+                {% if user.pu %}
+                    <th>Username</th>
+                {% endif %}
                 <th>Title</th>
                 <th style="width: 40%;">Content</th>
                 <th>Priority</th>
                 <th>Creation Date</th>
-                <th>Actions</th>
+                <th style="width: 15%;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +29,9 @@
                     {% if ticket.status == 'Open' %}
                         <tr>
                             <td>{{ ticket.ticket_id }}</td>
+                            {% if user.pu %}
+                                <td>{{ ticket.user.username }}</td>
+                            {% endif %}
                             <td>{{ ticket.title }}</td>
                             <td style="width: 40%;">{{ ticket.content }}</td>
                             <td>{{ ticket.priority }}</td>

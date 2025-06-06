@@ -22,4 +22,4 @@ class ActiveTicket(db.Model):
     priority = db.Column(db.String(50), default='Normal')
     status = db.Column(db.String(50), default='Open')
     created_at = db.Column(db.DateTime(timezone=True), default=func.now())
-
+    user = db.relationship('User', backref='active_tickets')
