@@ -59,5 +59,5 @@ def signup():
             db.session.commit()
             flash('Account created!', category='success')
             return redirect(url_for('routes.home'))
-        
+
     return render_template('sign-up.html', user=current_user)
