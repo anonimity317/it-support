@@ -6,9 +6,9 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
+
 class AuthService:
     """Handles authentication logic. SOLID principle: Single Responsibility Principle (SRP)"""
-
 
     @staticmethod
     def authenticate(username, password):

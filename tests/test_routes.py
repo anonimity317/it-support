@@ -97,4 +97,4 @@ class FlaskRoutesTest(unittest.TestCase):
             'password1': 'test',
             'password2': 'test'
         })
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 400)
