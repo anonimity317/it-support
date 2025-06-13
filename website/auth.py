@@ -9,6 +9,7 @@ auth = Blueprint('auth', __name__)
 class AuthService:
     """Handles authentication logic. SOLID principle: Single Responsibility Principle (SRP)"""
 
+
     @staticmethod
     def authenticate(username, password):
         user = User.query.filter_by(username=username).first()
@@ -34,6 +35,7 @@ class AuthService:
         db.session.add(new_user)
         db.session.commit()
         return new_user, None
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
