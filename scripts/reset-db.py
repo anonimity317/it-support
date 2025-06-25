@@ -1,10 +1,10 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from website import create_app, db
 from website.models import User, ActiveTicket
 from werkzeug.security import generate_password_hash
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 app = create_app()
 with app.app_context():
@@ -45,7 +45,7 @@ with app.app_context():
             password=generate_password_hash('password', method='pbkdf2:sha1', salt_length=8),
             pu=False
         )
-        db.session.add(user)  
+        db.session.add(user)
         db.session.flush()  # Ensure user.user_id is available
 
         ticket = ActiveTicket(
