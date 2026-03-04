@@ -37,3 +37,32 @@ jobs:
       - name: Run unit tests
         run: |
           pytest
+  
+  sast:
+    name: Static Application Security Testing
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/init@v3
+        with:
+          category: 'security'
+          languages: 'python'
+
+      - name: Install dependencies
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+        
+      - name: Build CodeQL DB
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
