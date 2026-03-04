@@ -168,7 +168,7 @@ jobs:
         with: 
           name: zap-report 
           path: | 
-            zap_report.json zap_report.md
+            zap_report.json && zap_report.md && zap_report.html
 
       - name: Upload SARIF to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
