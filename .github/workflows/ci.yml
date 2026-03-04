@@ -161,16 +161,10 @@ jobs:
         with: 
           target: 'http://localhost:5000' 
           fail_action: false 
-          cmd_options: '-J zap_report.json -w zap_report.md -H zap_report.html --sarif zap_report.sarif'
+          cmd_options: '-J zap_report.json -w zap_report.md'
  
       - name: Upload ZAP Report 
         uses: actions/upload-artifact@v4 
         with: 
           name: zap-report 
-          path: | 
-            zap_report.json && zap_report.md && zap_report.html
-
-      - name: Upload SARIF to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: zap_report.sarif
+          path: zap_report.json
